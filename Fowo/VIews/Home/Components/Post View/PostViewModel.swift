@@ -30,8 +30,9 @@ extension PostView {
             User.anotherMock.like(post: &post)
         }
 
+        @Published var shouldNavigateToCommentPage: Bool = false
         func onCommentButtonTapped() {
-
+            shouldNavigateToCommentPage.toggle()
         }
 
         @Published var isBookmarked: Bool = false

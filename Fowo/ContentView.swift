@@ -17,7 +17,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            NavigationLink {
+            NavigationLink(isActive: $viewModel.shouldNavigateToCommentPage) {
                 PostDetailView(viewModel: viewModel)
             } label: {
                 PostView(viewModel: viewModel, truncated: true)
