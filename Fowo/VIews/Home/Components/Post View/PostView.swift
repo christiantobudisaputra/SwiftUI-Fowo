@@ -9,24 +9,25 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 struct PostView: View {
-    @StateObject private var viewModel: ViewModel
+    @ObservedObject private var viewModel: ViewModel
+    private let isTruncated: Bool
 
-    init(viewModel: ViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: ViewModel, truncated: Bool) {
+        _viewModel = ObservedObject(wrappedValue: viewModel)
+        self.isTruncated = truncated
     }
 
     var body: some View {
         VStack(alignment: .leading) {
-            HeaderSection()
+            HeaderView(post: viewModel.post) {
+                viewModel.onMenuButtonTapped()
+            }
             ContentSection()
             Divider()
             FooterSection()
         }
-        .confirmationDialog(
-            "",
-            isPresented: $viewModel.showActionSheet,
-            titleVisibility: .hidden
-        ) {
+        .padding()
+        .confirmationDialog("", isPresented: $viewModel.showActionSheet) {
             Button("Ajak Ngobrol") { /* no-op */ }
             Button("Laporkan Konten") { /* no-op */ }
             Button("Laporkan User") { /* no-op */ }
@@ -35,55 +36,13 @@ struct PostView: View {
         }
     }
 
-    private func HeaderSection() -> some View {
-        HStack {
-            WebImage(url: viewModel.imageUrl)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: 38)
-                .cornerRadius(4)
-            VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    Text(viewModel.post.user.company.name.uppercased())
-                    Text(viewModel.post.user.username)
-                        .foregroundColor(.secondary)
-                }
-
-                HStack {
-                    Text(viewModel.post.timestamp.formatted(date: .long, time: .omitted))
-                        .foregroundColor(.secondary)
-                    Text(viewModel.post.subfowo.path)
-                        .font(.footnote.bold())
-                        .padding(2)
-                        .padding(.horizontal, 4)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(4)
-                }
-            }
-
-            Spacer()
-
-            Button {
-                viewModel.onMenuButtonTapped()
-            } label: {
-                Image(systemName: "circle.grid.3x3.fill")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 16, height: 6)
-                    .clipped()
-            }
-            .foregroundColor(.secondary)
-            .font(.caption2)
-        }
-    }
-
     private func ContentSection() -> some View {
-        VStack(alignment: .leading, spacing: viewModel.isTruncated ? 0 : 8) {
+        VStack(alignment: .leading, spacing: isTruncated ? 0 : 8) {
             Text(viewModel.post.title)
                 .font(.title2.bold())
             Text(viewModel.post.description)
-                .frame(maxHeight: viewModel.isTruncated ? 240 : .none)
+                .frame(maxHeight: isTruncated ? 240 : .none)
+                .multilineTextAlignment(.leading)
             HStack {
                 Spacer()
                 Text("\(viewModel.post.likes.count) menyukai")
@@ -138,8 +97,7 @@ struct PostView: View {
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel: PostView.ViewModel = .init(post: .mock)
-        PostView(viewModel: viewModel)
-            .padding()
+        PostView(viewModel: viewModel, truncated: true)
             .previewLayout(.sizeThatFits)
     }
 }

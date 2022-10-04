@@ -9,7 +9,12 @@ import Foundation
 
 struct Company: Equatable {
     let name: String
-    let logoUrl: String
+    let logoUrl: URL?
+
+    init(name: String, logoUrl: String) {
+        self.name = name
+        self.logoUrl = URL(string: logoUrl)
+    }
 }
 
 #if DEBUG
@@ -19,6 +24,6 @@ extension Company {
         logoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxTLJNjVIpsu9KBsZAN_bqphVaBw7nvpU3Og&usqp=CAU"
     )
 
-    static let anotherMock: Self = .init(name: "Logo", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png")
+    static let anotherMock: Self = .init(name: "Google", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png")
 }
 #endif

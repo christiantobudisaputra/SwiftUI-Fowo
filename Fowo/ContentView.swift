@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel: PostView.ViewModel
+
+    init() {
+        let viewModel: PostView.ViewModel = .init(post: .mock)
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            NavigationLink {
+                PostDetailView(viewModel: viewModel)
+            } label: {
+                PostView(viewModel: viewModel, truncated: true)
+                    .foregroundColor(.primary)
+            }
         }
-        .padding()
     }
 }
 

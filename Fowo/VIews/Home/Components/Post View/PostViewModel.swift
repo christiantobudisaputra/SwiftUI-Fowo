@@ -10,16 +10,12 @@ import Foundation
 extension PostView {
     final class ViewModel: ObservableObject {
         @Published var post: Post
-        let isTruncated: Bool
 
-        init(post: Post, truncated: Bool = true) {
+        init(post: Post) {
             self.post = post
-            isTruncated = truncated
         }
 
         // MARK: - Header Properties & Methods
-        lazy var imageUrl: URL? = URL(string: post.user.company.logoUrl)
-
         @Published var showActionSheet: Bool = false
         func onMenuButtonTapped() {
             showActionSheet.toggle()
