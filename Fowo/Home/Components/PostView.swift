@@ -5,9 +5,12 @@
 //  Created by Christianto Budisaputra on 04/10/22.
 //
 
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct PostView: View {
+    let imageUrl: String = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxTLJNjVIpsu9KBsZAN_bqphVaBw7nvpU3Og&usqp=CAU"
+
     var body: some View {
         VStack(alignment: .leading) {
             HeaderSection()
@@ -19,7 +22,7 @@ struct PostView: View {
 
     private func HeaderSection() -> some View {
         HStack {
-            Image("tvlk")
+            WebImage(url: URL(string: imageUrl))
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: 38)
