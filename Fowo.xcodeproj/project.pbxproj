@@ -11,6 +11,7 @@
 		8390E12328EC894000BD9DFE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8390E12228EC894000BD9DFE /* ContentView.swift */; };
 		8390E12528EC894100BD9DFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8390E12428EC894100BD9DFE /* Assets.xcassets */; };
 		8390E12828EC894100BD9DFE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8390E12728EC894100BD9DFE /* Preview Assets.xcassets */; };
+		8390E13128EC8A0900BD9DFE /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8390E13028EC8A0900BD9DFE /* PostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		8390E12228EC894000BD9DFE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8390E12428EC894100BD9DFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8390E12728EC894100BD9DFE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8390E13028EC8A0900BD9DFE /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 				8390E12028EC894000BD9DFE /* FowoApp.swift */,
 				8390E12228EC894000BD9DFE /* ContentView.swift */,
 				8390E12428EC894100BD9DFE /* Assets.xcassets */,
+				8390E12E28EC89E500BD9DFE /* Home */,
 				8390E12628EC894100BD9DFE /* Preview Content */,
 			);
 			path = Fowo;
@@ -65,6 +68,22 @@
 				8390E12728EC894100BD9DFE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8390E12E28EC89E500BD9DFE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8390E12F28EC89FF00BD9DFE /* Components */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8390E12F28EC89FF00BD9DFE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8390E13028EC8A0900BD9DFE /* PostView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8390E12328EC894000BD9DFE /* ContentView.swift in Sources */,
+				8390E13128EC8A0900BD9DFE /* PostView.swift in Sources */,
 				8390E12128EC894000BD9DFE /* FowoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
