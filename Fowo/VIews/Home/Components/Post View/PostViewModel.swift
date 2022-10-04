@@ -8,8 +8,8 @@
 import Foundation
 
 extension PostView {
-    final class ViewModel {
-        var post: Post
+    final class ViewModel: ObservableObject {
+        @Published var post: Post
 
         init(post: Post) {
             self.post = post
@@ -21,10 +21,10 @@ extension PostView {
         // MARK: - Content Properties & Methods
 
         // MARK: - Footer Properties & Methods
-        var isLiked: Bool = false
+        @Published var isLiked: Bool = false
         func onLikeButtonTapped() {
             isLiked.toggle()
-            User.mock.like(post: &post)
+            User.anotherMock.like(post: &post)
         }
 
         func onCommentButtonTapped() {

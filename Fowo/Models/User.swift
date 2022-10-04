@@ -21,6 +21,12 @@ struct User {
     }
 }
 
+extension User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        lhs.company == rhs.company && lhs.username == rhs.username
+    }
+}
+
 #if DEBUG
 extension User {
     static let mock: Self = .init(company: .mock, username: "attahalilintar")

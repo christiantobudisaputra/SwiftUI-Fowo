@@ -9,10 +9,10 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 struct PostView: View {
-    private let viewModel: ViewModel
+    @StateObject private var viewModel: ViewModel
 
     init(viewModel: ViewModel) {
-        self.viewModel = viewModel
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Company {
+struct Company: Equatable {
     let name: String
     let logoUrl: String
 }

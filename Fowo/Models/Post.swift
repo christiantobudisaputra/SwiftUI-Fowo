@@ -19,7 +19,11 @@ struct Post {
     var comments: [Comment] = []
 
     mutating func addLike(user: User) {
-        likes.append(user)
+        if let userIndex: Int = likes.firstIndex(of: user) {
+            likes.remove(at: userIndex)
+        } else {
+            likes.append(user)
+        }
     }
 
     mutating func addComment(comment: Comment) {
