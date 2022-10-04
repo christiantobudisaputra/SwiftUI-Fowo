@@ -22,6 +22,17 @@ struct PostView: View {
             Divider()
             FooterSection()
         }
+        .confirmationDialog(
+            "",
+            isPresented: $viewModel.showActionSheet,
+            titleVisibility: .hidden
+        ) {
+            Button("Ajak Ngobrol") { /* no-op */ }
+            Button("Laporkan Konten") { /* no-op */ }
+            Button("Laporkan User") { /* no-op */ }
+            Button("Block User", role: .destructive) { /* no-op */ }
+            Button("Batal", role: .cancel) { /* no-op */ }
+        }
     }
 
     private func HeaderSection() -> some View {
@@ -45,6 +56,7 @@ struct PostView: View {
                         .font(.footnote.bold())
                         .padding(2)
                         .padding(.horizontal, 4)
+                        .foregroundColor(.white)
                         .background(Color.blue)
                         .cornerRadius(4)
                 }
@@ -53,7 +65,7 @@ struct PostView: View {
             Spacer()
 
             Button {
-
+                viewModel.onMenuButtonTapped()
             } label: {
                 Image(systemName: "circle.grid.3x3.fill")
                     .resizable()
@@ -67,11 +79,11 @@ struct PostView: View {
     }
 
     private func ContentSection() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: viewModel.isTruncated ? 0 : 8) {
             Text(viewModel.post.title)
                 .font(.title2.bold())
             Text(viewModel.post.description)
-                .frame(maxHeight: 240)
+                .frame(maxHeight: viewModel.isTruncated ? 240 : .none)
             HStack {
                 Spacer()
                 Text("\(viewModel.post.likes.count) menyukai")
@@ -97,7 +109,7 @@ struct PostView: View {
             )
             Spacer()
             PostViewActionButton(
-                icon: "bookmark",
+                icon: viewModel.isBookmarked ? "bookmark.fill" : "bookmark",
                 title: "Bookmark",
                 action: viewModel.onBookmarkButtonTapped
             )
@@ -129,6 +141,5 @@ struct PostView_Previews: PreviewProvider {
         PostView(viewModel: viewModel)
             .padding()
             .previewLayout(.sizeThatFits)
-            .preferredColorScheme(.dark)
     }
 }
