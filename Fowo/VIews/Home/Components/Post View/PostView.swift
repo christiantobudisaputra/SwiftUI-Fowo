@@ -9,7 +9,11 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 struct PostView: View {
-    let imageUrl: String = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxTLJNjVIpsu9KBsZAN_bqphVaBw7nvpU3Og&usqp=CAU"
+    private let viewModel: ViewModel
+
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,22 +26,22 @@ struct PostView: View {
 
     private func HeaderSection() -> some View {
         HStack {
-            WebImage(url: URL(string: imageUrl))
+            WebImage(url: viewModel.imageUrl)
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: 38)
                 .cornerRadius(4)
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
-                    Text("TRAVELOKA")
-                    Text("kris")
+                    Text(viewModel.post.user.company.name.uppercased())
+                    Text(viewModel.post.user.username)
                         .foregroundColor(.secondary)
                 }
 
                 HStack {
-                    Text("sehari yang lalu")
+                    Text(viewModel.post.timestamp.formatted(date: .long, time: .omitted))
                         .foregroundColor(.secondary)
-                    Text("f/Publik")
+                    Text(viewModel.post.subfowo.path)
                         .font(.footnote.bold())
                         .padding(2)
                         .padding(.horizontal, 4)
@@ -64,14 +68,14 @@ struct PostView: View {
 
     private func ContentSection() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Lorem Ipsum")
+            Text(viewModel.post.title)
                 .font(.title2.bold())
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum lorem vitae dolor vehicula pulvinar. Quisque consectetur nunc id neque malesuada, quis ullamcorper sapien tristique. Praesent venenatis dui eget erat varius, id vehicula ipsum suscipit. Curabitur scelerisque fermentum lacus, ut elementum felis tincidunt in. Aenean a molestie dolor, vitae tincidunt magna. Vestibulum feugiat leo ac dapibus pharetra. Etiam sit amet risus non mauris dignissim ornare. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec accumsan metus eros, ut varius mauris dignissim sit amet. Etiam et pharetra purus, nec fermentum risus. Phasellus bibendum mauris sit amet maximus placerat. Vivamus imperdiet gravida risus, ut fringilla dui aliquam quis. Vivamus nisl purus, fermentum at massa aliquam, dapibus blandit nulla.")
+            Text(viewModel.post.description)
                 .frame(maxHeight: 240)
             HStack {
                 Spacer()
-                Text("15 menyukai")
-                Text("20 komentar")
+                Text("\(viewModel.post.likes.count) menyukai")
+                Text("\(viewModel.post.comments.count) komentar")
             }
             .foregroundColor(.secondary)
         }
@@ -105,7 +109,8 @@ struct PostView: View {
 
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
-        PostView()
+        let viewModel: PostView.ViewModel = .init(post: .mock)
+        PostView(viewModel: viewModel)
             .padding()
             .previewLayout(.sizeThatFits)
             .preferredColorScheme(.dark)
