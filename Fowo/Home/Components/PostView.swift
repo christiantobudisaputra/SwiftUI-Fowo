@@ -80,42 +80,26 @@ struct PostView: View {
     private func FooterSection() -> some View {
         HStack {
             Spacer()
-
-            Button {
-                
-            } label: {
-                HStack {
-                    Image(systemName: "hand.thumbsup")
-                    Text("Like")
-                }
-            }
-
+            PostViewActionButton(icon: "hand.thumbsup", title: "Like")
             Spacer()
-
-            Button {
-
-            } label: {
-                HStack {
-                    Image(systemName: "bubble.left")
-                    Text("Komentar")
-                }
-            }
-
+            PostViewActionButton(icon: "bubble.left", title: "Komentar")
             Spacer()
-
-            Button {
-                
-            } label: {
-                HStack {
-                    Image(systemName: "bookmark")
-                    Text("Bookmark")
-                }
-            }
-
+            PostViewActionButton(icon: "bookmark", title: "Bookmark")
             Spacer()
         }
         .foregroundColor(.primary)
         .padding(6)
+    }
+
+    private func PostViewActionButton(icon: String, title: String) -> some View {
+        Button {
+
+        } label: {
+            HStack {
+                Image(systemName: icon)
+                Text(title)
+            }
+        }
     }
 }
 
