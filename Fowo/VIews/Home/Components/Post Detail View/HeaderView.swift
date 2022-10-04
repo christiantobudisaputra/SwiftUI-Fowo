@@ -41,18 +41,21 @@ struct HeaderView: View {
                 .cornerRadius(4)
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
-                    Text(user.company.name.uppercased())
+                    Text(user.company.name)
+                        .font(.subheadline.weight(.semibold))
                     Text(user.username)
                         .foregroundColor(.secondary)
+                        .font(.subheadline.weight(.medium))
                 }
+
 
                 HStack {
                     Text(timestamp.formatted(date: .long, time: .omitted))
                         .foregroundColor(.secondary)
-                        .font(.callout)
+
                     if let subfowo {
                         Text(subfowo.path)
-                            .font(.footnote.bold())
+                            .bold()
                             .padding(2)
                             .padding(.horizontal, 4)
                             .foregroundColor(.white)
@@ -60,6 +63,7 @@ struct HeaderView: View {
                             .cornerRadius(4)
                     }
                 }
+                .font(.footnote)
             }
 
             Spacer()
@@ -75,6 +79,7 @@ struct HeaderView: View {
             }
             .foregroundColor(.secondary)
             .font(.caption2)
+            .scaleEffect(0.75)
         }
     }
 }

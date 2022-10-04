@@ -37,11 +37,11 @@ struct PostView: View {
     }
 
     private func ContentSection() -> some View {
-        VStack(alignment: .leading, spacing: isTruncated ? 0 : 8) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(viewModel.post.title)
-                .font(.title2.bold())
+                .font(.title3.bold())
             Text(viewModel.post.description)
-                .frame(maxHeight: isTruncated ? 240 : .none)
+                .frame(maxHeight: isTruncated ? 180 : .none)
                 .multilineTextAlignment(.leading)
             HStack {
                 Spacer()
@@ -50,6 +50,7 @@ struct PostView: View {
             }
             .foregroundColor(.secondary)
         }
+        .font(.subheadline)
     }
 
     private func FooterSection() -> some View {
@@ -74,6 +75,7 @@ struct PostView: View {
             )
             Spacer()
         }
+        .font(.footnote.weight(.medium))
         .foregroundColor(.primary)
         .padding(.vertical, 6)
     }

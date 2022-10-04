@@ -19,9 +19,13 @@ struct ContentView: View {
         NavigationView {
             NavigationLink(isActive: $viewModel.shouldNavigateToCommentPage) {
                 PostDetailView(viewModel: viewModel)
+                    .navigationTitle(viewModel.post.subfowo.path)
+                    .navigationBarTitleDisplayMode(.inline)
             } label: {
-                PostView(viewModel: viewModel, truncated: true)
-                    .foregroundColor(.primary)
+                ScrollView {
+                    PostView(viewModel: viewModel, truncated: true)
+                        .foregroundColor(.primary)
+                }
             }
         }
     }
